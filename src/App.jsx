@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import "./assets/style.css";
 import axios from "axios";
@@ -46,7 +46,8 @@ function App() {
       setIsAuth(true);
     } catch (error) {
       setIsAuth(false);
-      console.log(error);
+      // console.error(error);
+      alert(error.response.data.message);
     }
   }
 
@@ -72,7 +73,8 @@ function App() {
         }
       }
     } catch (error) {
-      console.error("Token 驗證失敗：", error.response?.data);
+      // console.error("Token 驗證失敗：", error.response?.data);
+      alert(error.response.data.message);
     }
   };
 
@@ -90,7 +92,6 @@ function App() {
 
   const deleteData = async (id) => {
     try {
-      console.log(id);
       const response = await axios.delete(
         `${API_BASE}/api/${API_PATH}/admin/product/${id}`
       );
@@ -234,7 +235,7 @@ function App() {
                         <div className="d-flex flex-wrap">
                           {tempProduct.imagesUrl.map((url, index) => {
                             return (
-                              <img key={index} src={url} className="images" />
+                              <img key={index} src={url} className="images" alt="更多圖片" />
                             )
                           })}
                         </div>
